@@ -206,6 +206,7 @@ public class MainService extends Service implements SurfaceHolder.Callback, Medi
         }
     }
 
+    //DisplaySettingManager m_dsm = new DisplaySettingManager(getInstance().getApplicationContext());
 
     @Nullable
     @Override
