@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:contentDescription="@string/app_name"
+        android:theme="@style/Base.AlertDialog.AppCompat"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="wrap_content"
+        android:layout_height="190dp"
+        android:background="@android:color/white"
+        android:hint="Press the button to start service"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="211dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/edit_message"
+        android:text="start service"
+        android:theme="@style/Base.AlertDialog.AppCompat"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="211dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/button5"
+        android:text="stop service"
+        android:theme="@style/Base.AlertDialog.AppCompat"
+        android:visibility="visible" />
+
+</RelativeLayout>
