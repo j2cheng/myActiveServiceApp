@@ -21,7 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     public final static int REQUEST_CODE = 5463 & 0xffffff00;
-    private final static String TAG = "txrxservice";
+    private final static String TAG = "myactiveserviceapp";
     private boolean serviceStarted = false;
 
     public void checkDrawOverlayPermission() {
@@ -32,8 +32,12 @@ public class MainActivity extends AppCompatActivity {
                     Uri.parse("package:" + getPackageName()));
             /** request permission via start activity for result */
             startActivityForResult(intent, REQUEST_CODE);
+
+            Log.e(TAG, "checkDrawOverlayPermission: calling startActivityForResult");
+
         }
         else {
+            Log.i(TAG, "checkDrawOverlayPermission: calling startServiceView");
             startServiceView();
         }
     }
@@ -45,10 +49,12 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             /* if so check once again if we have permission */
             if (Settings.canDrawOverlays(this)) {
-                Log.e(TAG, "Can draw overlays");
+                Log.e(TAG, "onActivityResult: Can draw overlays");
             }
         }
-//        startServiceView();
+
+        Log.e(TAG, "onActivityResult: Force run startServiceView");
+        startServiceView();
     }
 
     @Override
@@ -63,18 +69,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Log.i(TAG, "onCreate calling checkDrawOverlayPermission");
             checkDrawOverlayPermission();
         }
-//        else {
-//            startServiceView();
-//        }
+        else {
+            Log.i(TAG, "onCreate calling startServiceView");
+            startServiceView();
+        }
 
         Button startSrvButton = (Button) findViewById(R.id.button5);
         startSrvButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                Log.e(TAG, "Service start button clicked");
+                Log.i(TAG, "Service start button clicked");
                 startServiceView();
-                Log.e(TAG, "startServiceView called");
+                Log.i(TAG, "startServiceView called");
             }
         });
 
@@ -92,13 +100,14 @@ public class MainActivity extends AppCompatActivity {
     public void startServiceView()
     {
         if (serviceStarted) {
-            Log.e(TAG, "service is already running");
+            Log.i(TAG, "service is already running");
             return;
         }
-        Log.e(TAG, "starting service");
+        Log.e(TAG, "startServiceView: starting service");
         Intent serviceIntent = new Intent(getApplicationContext(), MyMainService.class);
         startService(serviceIntent);
         serviceStarted = true;
+        Log.e(TAG, "startServiceView: is done");
     }
 
     public void stopServiceView()
